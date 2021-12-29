@@ -3,7 +3,7 @@
 To start your Phoenix server:
 
 - Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
+- Create and migrate your database with `mix ecto.create` then `mix ecto.migrate`
 - Getting data from a csv file located at "priv/repo/data/campaigns.csv" `mix run priv/repo/seeds.exs`
 - Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 

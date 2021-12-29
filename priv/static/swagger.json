@@ -1,0 +1,309 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "CampaignRequest": {
+      "description": "POST body for creating a campaign",
+      "properties": {
+        "campaign": {
+          "$ref": "#/definitions/campaign",
+          "description": "The campaign details"
+        }
+      },
+      "title": "CampaignRequest",
+      "type": "object"
+    },
+    "CampaignResponse": {
+      "description": "Response schema for multiple campaigns",
+      "properties": {
+        "data": {
+          "description": "The campaigns details",
+          "items": {
+            "$ref": "#/definitions/campaign"
+          },
+          "type": "array"
+        }
+      },
+      "title": "CampaignResponse",
+      "type": "object"
+    },
+    "campaign": {
+      "description": "A campaign.",
+      "example": {
+        "budget": 8000,
+        "description": "We are looking for familys with babies less than 12 months to showcase our great new babyfood!",
+        "end_date": "2020-03-10 12:00:00",
+        "hashtags": "#applebabyfood #baby",
+        "name": "Apple Baby Food",
+        "start_date": "2020-01-01 12:00:00",
+        "team_id": 2
+      },
+      "properties": {
+        "data": {
+          "properties": {
+            "budget": {
+              "description": "Budget of the campaign.",
+              "type": "integer"
+            },
+            "description": {
+              "description": "Description of the campaign.",
+              "type": "string"
+            },
+            "end_time": {
+              "description": "End time of the campaign.",
+              "type": "string"
+            },
+            "hashtags": {
+              "description": "Hashtags of the campaign.",
+              "type": "string"
+            },
+            "name": {
+              "description": "Campaign name",
+              "type": "string"
+            },
+            "start_time": {
+              "description": "Start time of the campaign.",
+              "type": "string"
+            },
+            "team_id": {
+              "description": "Team ID of the campaign.",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "description",
+            "team_id",
+            "hashtags",
+            "budget",
+            "end_time",
+            "start_time",
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "title": "Campaign",
+      "type": "object"
+    }
+  },
+  "host": "localhost:4000",
+  "info": {
+    "contact": {
+      "email": "dkb139@uowmail.edu.au",
+      "name": "Kyle"
+    },
+    "description": "API Documentation for MyAPI v1",
+    "termsOfService": "Open for public",
+    "title": "MyAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/campaigns": {
+      "get": {
+        "description": "List of campaigns",
+        "operationId": "CampaignsApiWeb.CampaignController.index",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create a campaign",
+        "operationId": "CampaignsApiWeb.CampaignController.create",
+        "parameters": [
+          {
+            "description": "Campaign Details",
+            "in": "body",
+            "name": "campaign",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CampaignRequest"
+            },
+            "x-example": {
+              "campaign": {
+                "budget": 8000,
+                "description": "We are looking for familys with babies less than 12 months to showcase our great new babyfood!",
+                "end_date": "2020-03-10 12:00:00",
+                "hashtags": "#applebabyfood #baby",
+                "name": "Apple Baby Food",
+                "start_date": "2020-01-01 12:00:00",
+                "team_id": 2
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Campaign created OK",
+            "examples": {
+              "application/json": {
+                "campaign": {
+                  "budget": 8000,
+                  "description": "We are looking for familys with babies less than 12 months to showcase our great new babyfood!",
+                  "end_date": "2020-03-10 12:00:00",
+                  "hashtags": "#applebabyfood #baby",
+                  "name": "Apple Baby Food",
+                  "start_date": "2020-01-01 12:00:00",
+                  "team_id": 2
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CampaignResponse"
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ]
+      }
+    },
+    "/api/campaigns/{id}": {
+      "delete": {
+        "description": "Delete a campaign by ID",
+        "operationId": "CampaignsApiWeb.CampaignController.delete",
+        "parameters": [
+          {
+            "description": "Campaign ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          }
+        ],
+        "responses": {
+          "203": {
+            "description": "No Content - Deleted Successfully"
+          }
+        },
+        "summary": "Delete a campaign",
+        "tags": [
+          "Campaign"
+        ]
+      },
+      "get": {
+        "description": "Show a campaign by ID",
+        "operationId": "CampaignsApiWeb.CampaignController.show",
+        "parameters": [
+          {
+            "description": "Campaign ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 2
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Show campaign",
+        "tags": [
+          "Campaign"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update all attributes of a campaign",
+        "operationId": "CampaignsApiWeb.CampaignController.update",
+        "parameters": [
+          {
+            "description": "campaign ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          },
+          {
+            "description": "The campaign details",
+            "in": "body",
+            "name": "campaign",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CampaignRequest"
+            },
+            "x-example": {
+              "budget": 8000,
+              "description": "We are looking for familys with babies less than 12 months to showcase our great new babyfood!",
+              "end_date": "2020-03-10 12:00:00",
+              "hashtags": "#applebabyfood #baby",
+              "name": "Apple Baby Food",
+              "start_date": "2020-01-01 12:00:00",
+              "team_id": 2
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Successfully",
+            "examples": {
+              "application/json": {
+                "campaign": {
+                  "budget": 8000,
+                  "description": "We are looking for familys with babies less than 12 months to showcase our great new babyfood!",
+                  "end_date": "2020-03-10 12:00:00",
+                  "hashtags": "#applebabyfood #baby",
+                  "name": "Apple Baby Food",
+                  "start_date": "2020-01-01 12:00:00",
+                  "team_id": 2
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CampaignResponse"
+            }
+          }
+        },
+        "summary": "Update campaign",
+        "tags": [
+          "Campaign"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https",
+    "ws",
+    "wss"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Campaign resources",
+      "name": "Campaigns"
+    }
+  ]
+}
